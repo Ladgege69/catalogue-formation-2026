@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription Particulier - Auto-Formation Polynésienne</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0066CC;
+            --secondary: #FF6B00;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --accent: #00C9A7;
+            --text: #2d3436;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+            padding-bottom: 3rem;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--dark) 0%, #2d3561 100%);
+            color: white;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .header-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.8rem 1.5rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: #00b396;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,201,167,0.3);
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Formulaire */
+        .form-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+
+        .form-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .form-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-family: 'Merriweather', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .required {
+            color: var(--secondary);
+            margin-left: 0.25rem;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group input[type="date"],
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: 'Open Sans', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-group small {
+            display: block;
+            margin-top: 0.5rem;
+            color: #636e72;
+            font-size: 0.9rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, rgba(0,201,167,0.1), rgba(0,102,204,0.1));
+            border-left: 4px solid var(--accent);
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-box p {
+            margin-bottom: 0.5rem;
+            line-height: 1.7;
+        }
+
+        .info-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-box strong {
+            color: var(--primary);
+        }
+
+        .info-box ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .info-box li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* Checkbox */
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .checkbox-group:hover {
+            background: #e9ecef;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin: 0 !important;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        /* Radio buttons */
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .radio-option:hover {
+            background: #e9ecef;
+        }
+
+        .radio-option input[type="radio"]:checked + label {
+            font-weight: 700;
+        }
+
+        .radio-option input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .radio-option label {
+            margin: 0 !important;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        /* Bouton submit */
+        .submit-section {
+            text-align: center;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            padding: 1.2rem 3rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,102,204,0.3);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0,102,204,0.4);
+        }
+
+        .btn-submit:active {
+            transform: translateY(-1px);
+        }
+
+        /* Conclusion */
+        .conclusion-box {
+            background: linear-gradient(135deg, rgba(255,107,0,0.1), rgba(255,193,7,0.1));
+            border-left: 4px solid var(--secondary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .conclusion-box h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .conclusion-box p {
+            line-height: 1.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .conclusion-box ul {
+            margin-left: 1.5rem;
+            margin-top: 0.8rem;
+        }
+
+        .conclusion-box li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        /* Bouton flottant */
+        .floating-nav {
+            position: fixed;
+            right: 2rem;
+            bottom: 2rem;
+            z-index: 1000;
+        }
+
+        .floating-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .floating-btn.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .floating-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 30px rgba(0,0,0,0.25);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .form-card {
+                padding: 1.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-submit {
+                width: 100%;
+            }
+
+            .floating-nav {
+                right: 1rem;
+                bottom: 1rem;
+            }
+
+            .floating-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-card {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1>📝 Inscription Particulier</h1>
+            <p>Inscrivez-vous à nos formations professionnelles</p>
+            <div class="badge">🎓 Formation Continue & Perfectionnement</div>
+            <br>
+            <a href="catalogue_afp_2026.html" class="back-link">← Retour au catalogue</a>
+        </div>
+    </header>
+
+    <!-- Container -->
+    <div class="container">
+        <form id="inscriptionForm" class="form-card">
+            <!-- Section 1: Informations personnelles -->
+            <div class="form-section">
+                <h2 class="section-title">1. Informations Personnelles</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nom">Nom <span class="required">*</span></label>
+                        <input type="text" id="nom" name="nom" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prenom">Prénom <span class="required">*</span></label>
+                        <input type="text" id="prenom" name="prenom" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telephone">Téléphone <span class="required">*</span></label>
+                        <input type="tel" id="telephone" name="telephone" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="adresse">Adresse complète <span class="required">*</span></label>
+                    <textarea id="adresse" name="adresse" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="profession">Profession / Secteur d'activité</label>
+                    <input type="text" id="profession" name="profession">
+                    <small>Optionnel - Nous aide à adapter la formation à votre contexte</small>
+                </div>
+            </div>
+
+            <!-- Section 2: Formation souhaitée -->
+            <div class="form-section">
+                <h2 class="section-title">2. Formation Souhaitée</h2>
+                
+                <div class="form-group">
+                    <label for="formation">Intitulé de la formation <span class="required">*</span></label>
+                    <select id="formation" name="formation" required>
+                        <option value="">-- Sélectionnez une formation --</option>
+                        <optgroup label="Formations techniques - Mécanique">
+                            <option value="Mécanique général">Mécanique général</option>
+                            <option value="Le véhicule automobile">Le véhicule automobile</option>
+                            <option value="Le moteur thermique">Le moteur thermique</option>
+                            <option value="Gestion des moteurs essence">Gestion des moteurs essence</option>
+                            <option value="Gestion des moteurs Diesel">Gestion des moteurs Diesel</option>
+                            <option value="Les transmissions">Les transmissions</option>
+                            <option value="La tenue de route">La tenue de route</option>
+                            <option value="Le freinage">Le freinage</option>
+                            <option value="Électricité">Électricité</option>
+                            <option value="Le véhicule hybride">Le véhicule hybride</option>
+                            <option value="Le multiplexage">Le multiplexage</option>
+                            <option value="La climatisation">La climatisation</option>
+                            <option value="Les bases de l'hydraulique">Les bases de l'hydraulique</option>
+                            <option value="Les systèmes de confort et de sécurité">Les systèmes de confort et de sécurité</option>
+                        </optgroup>
+                        <optgroup label="Formations informatiques">
+                            <option value="L'outil informatique">L'outil informatique</option>
+                            <option value="Initiation à l'internet">Initiation à l'internet</option>
+                            <option value="Création de contenu">Création de contenu</option>
+                        </optgroup>
+                        <optgroup label="Logiciels bureautiques">
+                            <option value="Le traitement de texte">Le traitement de texte</option>
+                            <option value="Les feuilles de calcul">Les feuilles de calcul</option>
+                            <option value="Les diaporamas">Les diaporamas</option>
+                            <option value="Le dessin technique">Le dessin technique</option>
+                        </optgroup>
+                        <optgroup label="Intelligence Artificielle & Outils numériques">
+                            <option value="Utiliser ChatGPT en entreprise">Utiliser ChatGPT en entreprise</option>
+                            <option value="Utiliser Notion en entreprise">Utiliser Notion en entreprise</option>
+                            <option value="Utiliser N8N en entreprise">Utiliser N8N en entreprise</option>
+                            <option value="Créer un site internet en 1 heure">Créer un site internet en 1 heure</option>
+                        </optgroup>
+                        <option value="Autre (préciser dans le commentaire)">Autre (préciser dans le commentaire)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="niveau">Niveau souhaité</label>
+                    <select id="niveau" name="niveau">
+                        <option value="">-- Sélectionnez un niveau --</option>
+                        <option value="I">Niveau I - Bases / Initiation</option>
+                        <option value="II">Niveau II - Perfectionnement</option>
+                        <option value="III">Niveau III - Expertise / Diagnostic</option>
+                        <option value="Tous niveaux">Tous niveaux (parcours complet)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Section 3: Modalités de formation -->
+            <div class="form-section">
+                <h2 class="section-title">3. Modalités de Formation</h2>
+                
+                <div class="info-box">
+                    <p><strong>💡 Format de formation :</strong></p>
+                    <p>Nos formations pour particuliers peuvent être organisées selon deux modalités :</p>
+                    <ul>
+                        <li><strong>En présentiel</strong> - Dans nos locaux ou sur site partenaire</li>
+                        <li><strong>En e-learning</strong> - Formation à distance (disponible fin premier trimestre 2026)</li>
+                        <li><strong>Format mixte</strong> - Combinaison présentiel + e-learning</li>
+                    </ul>
+                </div>
+
+                <div class="form-group">
+                    <label>Format préféré <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="format1" name="format" value="Présentiel" required>
+                            <label for="format1">🏢 Présentiel - Formation dans nos locaux ou site partenaire</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="format2" name="format" value="E-learning" required>
+                            <label for="format2">💻 E-learning - Formation à distance (disponible fin T1 2026)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="format3" name="format" value="Mixte" required>
+                            <label for="format3">🔄 Mixte - Combinaison présentiel + e-learning</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="disponibilites">Disponibilités / Période souhaitée <span class="required">*</span></label>
+                    <textarea id="disponibilites" name="disponibilites" required placeholder="Exemple : Disponible en semaine du lundi au vendredi, préférence mars 2026"></textarea>
+                    <small>Indiquez vos disponibilités et préférences de dates</small>
+                </div>
+            </div>
+
+            <!-- Section 4: Commentaires -->
+            <div class="form-section">
+                <h2 class="section-title">4. Informations Complémentaires</h2>
+                
+                <div class="form-group">
+                    <label for="commentaires">Commentaires ou demandes spécifiques</label>
+                    <textarea id="commentaires" name="commentaires" placeholder="Besoins particuliers, questions, informations complémentaires..."></textarea>
+                </div>
+
+                <div class="info-box">
+                    <p><strong>💡 Financement :</strong></p>
+                    <p>Le coût de la formation et les modalités de paiement vous seront communiqués dans le devis personnalisé que vous recevrez sous 48h.</p>
+                </div>
+            </div>
+
+            <!-- Conclusion -->
+            <div class="conclusion-box">
+                <h3>📋 Prochaines étapes</h3>
+                <p>Suite à la réception de votre inscription, je vous contacterai pour :</p>
+                <ul>
+                    <li><strong>Confirmer votre inscription</strong> et les modalités de formation</li>
+                    <li>Vous communiquer le <strong>devis personnalisé</strong></li>
+                    <li>Répondre à toutes vos questions sur le <strong>financement et le paiement</strong></li>
+                </ul>
+                <p style="margin-top: 1rem;"><em><strong>Note :</strong> Si vous souhaitez que votre entreprise finance votre formation (dans le cadre d'une démarche personnelle), une convention de formation pourra être établie.</em></p>
+                <p style="margin-top: 0.5rem;"><strong>Délai de réponse :</strong> Vous serez contacté sous 48h ouvrées.</p>
+            </div>
+
+            <!-- Bouton Submit -->
+            <div class="submit-section">
+                <button type="submit" class="btn-submit">📤 Envoyer mon inscription</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bouton flottant -->
+    <div class="floating-nav">
+        <button class="floating-btn" id="btnTop" onclick="scrollToTop()" title="Retour en haut">
+            ⬆️
+        </button>
+    </div>
+
+    <script>
+        // Gestion du formulaire
+        document.getElementById('inscriptionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Récupérer toutes les données
+            const formData = new FormData(this);
+            let emailBody = 'INSCRIPTION PARTICULIER - AUTO-FORMATION POLYNÉSIENNE\n\n';
+            
+            emailBody += '=== INFORMATIONS PERSONNELLES ===\n';
+            emailBody += `Nom: ${formData.get('nom')}\n`;
+            emailBody += `Prénom: ${formData.get('prenom')}\n`;
+            emailBody += `Email: ${formData.get('email')}\n`;
+            emailBody += `Téléphone: ${formData.get('telephone')}\n`;
+            emailBody += `Adresse: ${formData.get('adresse')}\n`;
+            if (formData.get('profession')) {
+                emailBody += `Profession: ${formData.get('profession')}\n`;
+            }
+            emailBody += '\n';
+            
+            emailBody += '=== FORMATION SOUHAITÉE ===\n';
+            emailBody += `Formation: ${formData.get('formation')}\n`;
+            emailBody += `Niveau: ${formData.get('niveau') || 'Non précisé'}\n\n`;
+            
+            emailBody += '=== MODALITÉS DE FORMATION ===\n';
+            emailBody += `Format préféré: ${formData.get('format')}\n`;
+            emailBody += `Disponibilités: ${formData.get('disponibilites')}\n\n`;
+            
+            if (formData.get('commentaires')) {
+                emailBody += '=== COMMENTAIRES ===\n';
+                emailBody += formData.get('commentaires') + '\n';
+            }
+
+            // Créer le lien mailto
+            const subject = 'Inscription Particulier - ' + formData.get('formation');
+            const mailtoLink = `mailto:auto.formation.polynesienne@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+            
+            // Ouvrir le client email
+            window.location.href = mailtoLink;
+            
+            // Message de confirmation
+            alert('Votre client email va s\'ouvrir avec votre inscription pré-remplie. Vérifiez les informations et envoyez le message.\n\nVous serez contacté sous 48h ouvrées pour confirmer votre inscription.');
+        });
+
+        // Bouton retour en haut
+        const btnTop = document.getElementById('btnTop');
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                btnTop.classList.add('visible');
+            } else {
+                btnTop.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>

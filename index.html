@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto-Formation Polynésienne - Catalogue 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0066CC;
+            --secondary: #FF6B00;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --accent: #00C9A7;
+            --text: #2d3436;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+            font-size: 17px;
+        }
+
+        /* Header avec logos */
+        .header {
+            background: linear-gradient(135deg, var(--dark) 0%, #2d3561 100%);
+            color: white;
+            padding: 2.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0,201,167,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logos-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .logo-container-header {
+            background: white;
+            padding: 2rem 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 140px;
+            min-width: 320px;
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .logo-placeholder {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.3rem;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .header h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 3.2rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-description {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .description-block {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+            backdrop-filter: blur(10px);
+        }
+
+        .description-block h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.7rem;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .description-block p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            opacity: 0.95;
+        }
+
+        /* CTA Buttons */
+        .cta-section {
+            max-width: 1200px;
+            margin: -3rem auto 3rem;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .cta-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cta-btn {
+            background: white;
+            border: none;
+            padding: 2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .cta-btn:hover::before {
+            width: 100%;
+            opacity: 0.05;
+        }
+
+        .cta-btn.secondary::before {
+            background: var(--secondary);
+        }
+
+        .cta-btn.accent::before {
+            background: var(--accent);
+        }
+
+        .cta-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.7rem;
+            display: block;
+        }
+
+        .cta-btn h3 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .cta-btn p {
+            color: #636e72;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Sections */
+        .section {
+            background: white;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            font-family: 'Merriweather', serif;
+            color: var(--dark);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 700;
+        }
+
+        .section-number {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 900;
+            flex-shrink: 0;
+        }
+
+        .section h3 {
+            color: var(--secondary);
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem;
+            font-weight: 700;
+        }
+
+        .section p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .section ul {
+            margin: 1rem 0 1rem 2rem;
+            line-height: 1.9;
+        }
+
+        .section li {
+            margin-bottom: 0.7rem;
+            padding-left: 0.5rem;
+        }
+
+        .section li strong {
+            color: var(--primary);
+        }
+
+        /* Highlight Box */
+        .highlight {
+            background: linear-gradient(135deg, rgba(0,201,167,0.1), rgba(0,102,204,0.1));
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .highlight p {
+            margin: 0;
+            font-size: 1.05rem;
+            color: var(--dark);
+        }
+
+        /* Important Box */
+        .important-box {
+            background: linear-gradient(135deg, rgba(255,107,0,0.1), rgba(255,193,7,0.1));
+            border-left: 4px solid var(--secondary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .important-box p {
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+        }
+
+        .important-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #2d3561 100%);
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .contact-item strong {
+            display: block;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--accent);
+        }
+
+        .footer p {
+            text-align: center;
+            opacity: 0.8;
+            margin-top: 2rem;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .logos-row {
+                flex-direction: column;
+            }
+
+            .logo-container-header {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .header-description {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .section h2 {
+                font-size: 1.6rem;
+            }
+
+            .cta-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .cta-btn {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .cta-btn:nth-child(1) { animation-delay: 0.1s; }
+        .cta-btn:nth-child(2) { animation-delay: 0.2s; }
+        .cta-btn:nth-child(3) { animation-delay: 0.3s; }
+
+        /* Bouton retour en haut */
+        .floating-nav {
+            position: fixed;
+            right: 2rem;
+            bottom: 2rem;
+            z-index: 1000;
+        }
+
+        .floating-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .floating-btn.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .floating-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 30px rgba(0,0,0,0.25);
+        }
+
+        .floating-btn:active {
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 768px) {
+            .floating-nav {
+                right: 1rem;
+                bottom: 1rem;
+            }
+
+            .floating-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logos-row">
+                <div class="logo-container-header">
+                    <div class="logo-placeholder">AUTO FORMATION<br>POLYNÉSIENNE</div>
+                </div>
+                <div class="logo-container-header">
+                    <div class="logo-placeholder">FORMÉCA<br>e-learning</div>
+                </div>
+            </div>
+            <h1>Catalogue des Formations 2026</h1>
+            
+            <div class="header-description">
+                <div class="description-block">
+                    <h3>Auto-Formation Polynésienne</h3>
+                    <p>Accompagne les entreprises de Polynésie dans la formation technique et l'amélioration des compétences en atelier (maintenance auto, poids lourds, nautique et industrie).</p>
+                </div>
+                <div class="description-block">
+                    <h3>Forméca</h3>
+                    <p>Regroupe l'ensemble de ces formations, en présentiel et en e-learning, avec une approche orientée terrain, sécurité et performance opérationnelle.</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- CTA Buttons -->
+    <section class="cta-section">
+        <div class="cta-buttons">
+            <button class="cta-btn accent" onclick="window.location.href='tableau_formations.html'">
+                <span class="cta-icon">📊</span>
+                <h3>Tableau des formations</h3>
+                <p>Consultez le détail de tous nos modules de formation</p>
+            </button>
+
+            <button class="cta-btn secondary" onclick="window.location.href='demande_devis.html'">
+                <span class="cta-icon">💰</span>
+                <h3>Demande de devis</h3>
+                <p>Pour les entreprises - Obtenez un devis personnalisé</p>
+            </button>
+
+            <button class="cta-btn" onclick="window.location.href='inscription_particulier.html'">
+                <span class="cta-icon">📝</span>
+                <h3>Inscription</h3>
+                <p>Pour les particuliers - Inscrivez-vous à nos formations</p>
+            </button>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Section 1 -->
+        <section class="section">
+            <h2><span class="section-number">1</span> Positionnement et publics concernés</h2>
+            <p>Avec <strong>plus de 35 ans d'expérience en formation professionnelle</strong>, Auto-Formation Polynésienne accompagne les entreprises de Polynésie dans la <strong>maintenance automobile, poids lourds, nautique et industrie</strong>.</p>
+            
+            <div class="highlight">
+                <p><strong>Les formations sont prioritairement organisées en intra-entreprise, directement dans les ateliers</strong>, afin d'ancrer les apprentissages dans la réalité opérationnelle.</p>
+            </div>
+
+            <p>Elles s'adressent aux <strong>techniciens, agents de maintenance, responsables d'atelier, salariés en évolution de poste</strong> ainsi qu'aux personnes souhaitant consolider leurs compétences techniques.</p>
+        </section>
+
+        <!-- Section 2 -->
+        <section class="section">
+            <h2><span class="section-number">2</span> Niveaux et validation des compétences</h2>
+            <p>Les parcours sont structurés par niveaux (<strong>Initiation / Professionnel / Expert</strong>) et donnent lieu à :</p>
+            <ul>
+                <li>une <strong>évaluation des acquis</strong></li>
+                <li>une <strong>attestation de compétences</strong> avec niveau atteint</li>
+                <li>une <strong>traçabilité conforme</strong> aux exigences du FPG (Fonds Paritaire de Gestion)</li>
+            </ul>
+        </section>
+
+        <!-- Section 3 -->
+        <section class="section" id="formations">
+            <h2><span class="section-number">3</span> Domaines de formation technique</h2>
+            <p>Les modules couvrent les principaux systèmes rencontrés en atelier :</p>
+            <ul>
+                <li><strong>Le véhicule automobile</strong> : histoire, aspect commercial et administrative</li>
+                <li><strong>Mécanique générale</strong> : éléments de serrage, assemblage, roulement, métrologie, le dessin technique</li>
+                <li><strong>Moteurs essence et Diesel</strong> : injection et diagnostic orienté terrain</li>
+                <li><strong>Transmission</strong> : embrayage, boîte de vitesse manuelle, joint homocinétique</li>
+                <li><strong>Électricité</strong> : le courant électrique, batterie, circuit de charge et démarrage, relais</li>
+                <li><strong>Climatisation</strong> : boucle du froid, régulation, contrôle et entretien</li>
+                <li><strong>Matériels</strong> : maintenance maritime, engins de chantier et agricol</li>
+                <li><strong>Hydraulique</strong> : pompes, distributeurs, vérins</li>
+            </ul>
+
+            <div class="highlight">
+                <p><strong>Approche opérationnelle et sécurisée</strong> : fiabilité des interventions, précision du diagnostic, efficacité atelier.</p>
+            </div>
+        </section>
+
+        <!-- Section 4 -->
+        <section class="section">
+            <h2><span class="section-number">4</span> Véhicules hybrides et électriques</h2>
+            <h3>Périmètre pédagogique</h3>
+            <p>Les formations portent sur :</p>
+            <ul>
+                <li>l'architecture et le fonctionnement des systèmes hybrides/électriques</li>
+                <li>l'identification des composants et les principes de sécurité</li>
+                <li>la compréhension des risques et des bonnes pratiques de prudence</li>
+                <li>la capacité à réaliser un <strong>diagnostic de premier niveau</strong> et à dialoguer avec les équipes habilitées</li>
+            </ul>
+
+            <div class="important-box">
+                <p><strong>Important :</strong> ces formations ne constituent pas une habilitation électrique et ne permettent pas d'effectuer des travaux sous tension.</p>
+                <p>Toute intervention réglementée doit être réalisée par des techniciens habilités via un organisme agréé.</p>
+            </div>
+        </section>
+
+        <!-- Section 5 -->
+        <section class="section">
+            <h2><span class="section-number">5</span> Formations numériques & IA</h2>
+            <p style="font-style: italic; color: #636e72; margin-bottom: 1.5rem;">Sous l'égide de Global IA Agency</p>
+            
+            <p>Les formations liées au numérique avancé et à l'intelligence artificielle sont réalisées en partenariat et sous l'égide de <strong>Global IA Agency</strong>.</p>
+            
+            <p>Elles portent sur :</p>
+            <ul>
+                <li>l'utilisation professionnelle des <strong>IA génératives</strong> (ChatGPT)</li>
+                <li>la gestion de projets et bases de données avec <strong>Notion</strong></li>
+                <li>l'automatisation des processus (n8n, API, workflows)</li>
+                <li>la création et l'optimisation d'outils numériques pour l'entreprise</li>
+            </ul>
+
+            <div class="highlight">
+                <p>Ce positionnement garantit des contenus à jour, spécialisés et alignés avec les pratiques professionnelles actuelles.</p>
+            </div>
+        </section>
+
+        <!-- Section 6 -->
+        <section class="section">
+            <h2><span class="section-number">6</span> Gestion et performance d'atelier</h2>
+            <p><strong>Accompagnement spécifique</strong> sur : organisation des flux, heures productives / improductives, planification, tableau de bord et optimisation SAV — avec restitution d'actions concrètes.</p>
+        </section>
+
+        <!-- Section 7 -->
+        <section class="section">
+            <h2><span class="section-number">7</span> Modalités et formats</h2>
+            <ul>
+                <li>groupes limités à <strong>8 participants</strong></li>
+                <li>alternance apports / cas concrets / situations atelier</li>
+                <li>restitution des résultats et recommandations opérationnelles</li>
+                <li>modules <strong>e-learning complémentaires</strong> disponibles fin premier trimestre 2026 (format hybride)</li>
+            </ul>
+        </section>
+
+        <!-- Section 8 -->
+        <section class="section">
+            <h2><span class="section-number">8</span> Financement et conditions</h2>
+            <ul>
+                <li><strong>TVA non applicable</strong> (franchise en base)</li>
+                <li>Le Fonds Paritaire de Gestion est une institution locale qui peut prendre en charge tout ou partie des coûts de formation, pour les entreprises à jour de leurs cotisations, après étude et validation du dossier par ses services instructeurs.</li>
+                <li>frais annexes possibles (déplacements, logistique, supports spécifiques)</li>
+            </ul>
+        </section>
+
+        <!-- Section 9 -->
+        <section class="section">
+            <h2><span class="section-number">9</span> Bénéfices pour l'entreprise</h2>
+            <div class="highlight">
+                <p><strong>Diagnostics plus fiables, interventions plus sûres, réduction des erreurs et immobilisations, performance et organisation atelier renforcées.</strong></p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h2>Contactez-nous</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <strong>Email</strong>
+                    <a href="mailto:auto.formation.polynesienne@gmail.com">auto.formation.polynesienne@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <strong>N° T.A.H.I.T.I.</strong>
+                    A42 975-002
+                </div>
+                <div class="contact-item">
+                    <strong>N° RC</strong>
+                    TPI 17 1440 A
+                </div>
+                <div class="contact-item">
+                    <strong>OF enregistré</strong>
+                    N° 544
+                </div>
+            </div>
+            <p>© 2026 Auto-Formation Polynésienne • Forméca e-learning • Tous droits réservés</p>
+        </div>
+    </footer>
+
+    <!-- Bouton retour en haut -->
+    <div class="floating-nav">
+        <button class="floating-btn" id="btnTop" onclick="scrollToTop()" title="Retour en haut">
+            ⬆️
+        </button>
+    </div>
+
+    <script>
+        // Gestion du bouton "Retour en haut"
+        const btnTop = document.getElementById('btnTop');
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                btnTop.classList.add('visible');
+            } else {
+                btnTop.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demande de Devis - Auto-Formation Polynésienne</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0066CC;
+            --secondary: #FF6B00;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --accent: #00C9A7;
+            --text: #2d3436;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+            padding-bottom: 3rem;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--dark) 0%, #2d3561 100%);
+            color: white;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .header-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.8rem 1.5rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: #00b396;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,201,167,0.3);
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Formulaire */
+        .form-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+
+        .form-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .form-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-family: 'Merriweather', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .required {
+            color: var(--secondary);
+            margin-left: 0.25rem;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group input[type="number"],
+        .form-group input[type="date"],
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: 'Open Sans', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-group small {
+            display: block;
+            margin-top: 0.5rem;
+            color: #636e72;
+            font-size: 0.9rem;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, rgba(0,201,167,0.1), rgba(0,102,204,0.1));
+            border-left: 4px solid var(--accent);
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-box p {
+            margin-bottom: 0.5rem;
+            line-height: 1.7;
+        }
+
+        .info-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-box strong {
+            color: var(--primary);
+        }
+
+        /* Participants */
+        .participant-card {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .participant-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .participant-number {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .btn-remove {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-remove:hover {
+            background: #e55e00;
+            transform: translateY(-2px);
+        }
+
+        .participant-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .btn-add {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-add:hover {
+            background: #00b396;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,201,167,0.3);
+        }
+
+        /* Checkbox */
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .checkbox-group:hover {
+            background: #e9ecef;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin: 0 !important;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        /* Bouton submit */
+        .submit-section {
+            text-align: center;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            padding: 1.2rem 3rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,102,204,0.3);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0,102,204,0.4);
+        }
+
+        .btn-submit:active {
+            transform: translateY(-1px);
+        }
+
+        /* Conclusion */
+        .conclusion-box {
+            background: linear-gradient(135deg, rgba(255,107,0,0.1), rgba(255,193,7,0.1));
+            border-left: 4px solid var(--secondary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .conclusion-box h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .conclusion-box p {
+            line-height: 1.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .conclusion-box ul {
+            margin-left: 1.5rem;
+            margin-top: 0.8rem;
+        }
+
+        .conclusion-box li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        /* Bouton flottant */
+        .floating-nav {
+            position: fixed;
+            right: 2rem;
+            bottom: 2rem;
+            z-index: 1000;
+        }
+
+        .floating-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .floating-btn.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .floating-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 30px rgba(0,0,0,0.25);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .form-card {
+                padding: 1.5rem;
+            }
+
+            .participant-row {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-submit {
+                width: 100%;
+            }
+
+            .floating-nav {
+                right: 1rem;
+                bottom: 1rem;
+            }
+
+            .floating-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-card {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1>💰 Demande de Devis</h1>
+            <p>Obtenez un devis personnalisé pour vos formations professionnelles</p>
+            <a href="catalogue_afp_2026.html" class="back-link">← Retour au catalogue</a>
+        </div>
+    </header>
+
+    <!-- Container -->
+    <div class="container">
+        <form id="devisForm" class="form-card">
+            <!-- Section 1: Informations entreprise -->
+            <div class="form-section">
+                <h2 class="section-title">1. Informations Entreprise</h2>
+                
+                <div class="form-group">
+                    <label for="entreprise">Nom de l'entreprise <span class="required">*</span></label>
+                    <input type="text" id="entreprise" name="entreprise" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact">Nom du contact <span class="required">*</span></label>
+                    <input type="text" id="contact" name="contact" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="telephone">Téléphone <span class="required">*</span></label>
+                    <input type="tel" id="telephone" name="telephone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="adresse">Adresse de l'entreprise <span class="required">*</span></label>
+                    <textarea id="adresse" name="adresse" required></textarea>
+                    <small>Lieu où se dérouleront les formations</small>
+                </div>
+            </div>
+
+            <!-- Section 2: Formation souhaitée -->
+            <div class="form-section">
+                <h2 class="section-title">2. Formation Souhaitée</h2>
+                
+                <div class="form-group">
+                    <label for="formation">Intitulé de la formation <span class="required">*</span></label>
+                    <select id="formation" name="formation" required>
+                        <option value="">-- Sélectionnez une formation --</option>
+                        <optgroup label="Formations techniques - Mécanique">
+                            <option value="Mécanique général">Mécanique général</option>
+                            <option value="Le véhicule automobile">Le véhicule automobile</option>
+                            <option value="Le moteur thermique">Le moteur thermique</option>
+                            <option value="Gestion des moteurs essence">Gestion des moteurs essence</option>
+                            <option value="Gestion des moteurs Diesel">Gestion des moteurs Diesel</option>
+                            <option value="Les transmissions">Les transmissions</option>
+                            <option value="La tenue de route">La tenue de route</option>
+                            <option value="Le freinage">Le freinage</option>
+                            <option value="Électricité">Électricité</option>
+                            <option value="Le véhicule hybride">Le véhicule hybride</option>
+                            <option value="Le multiplexage">Le multiplexage</option>
+                            <option value="La climatisation">La climatisation</option>
+                            <option value="Les bases de l'hydraulique">Les bases de l'hydraulique</option>
+                            <option value="Les systèmes de confort et de sécurité">Les systèmes de confort et de sécurité</option>
+                        </optgroup>
+                        <optgroup label="Formations informatiques">
+                            <option value="L'outil informatique">L'outil informatique</option>
+                            <option value="Initiation à l'internet">Initiation à l'internet</option>
+                            <option value="Création de contenu">Création de contenu</option>
+                        </optgroup>
+                        <optgroup label="Logiciels bureautiques">
+                            <option value="Le traitement de texte">Le traitement de texte</option>
+                            <option value="Les feuilles de calcul">Les feuilles de calcul</option>
+                            <option value="Les diaporamas">Les diaporamas</option>
+                            <option value="Le dessin technique">Le dessin technique</option>
+                        </optgroup>
+                        <optgroup label="Intelligence Artificielle & Outils numériques">
+                            <option value="Utiliser ChatGPT en entreprise">Utiliser ChatGPT en entreprise</option>
+                            <option value="Utiliser Notion en entreprise">Utiliser Notion en entreprise</option>
+                            <option value="Utiliser N8N en entreprise">Utiliser N8N en entreprise</option>
+                            <option value="Créer un site internet en 1 heure">Créer un site internet en 1 heure</option>
+                        </optgroup>
+                        <option value="Autre (préciser dans le commentaire)">Autre (préciser dans le commentaire)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="niveau">Niveau souhaité</label>
+                    <select id="niveau" name="niveau">
+                        <option value="">-- Sélectionnez un niveau --</option>
+                        <option value="I">Niveau I - Bases / Initiation</option>
+                        <option value="II">Niveau II - Perfectionnement</option>
+                        <option value="III">Niveau III - Expertise / Diagnostic</option>
+                        <option value="Tous niveaux">Tous niveaux (parcours complet)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Section 3: Dates et horaires -->
+            <div class="form-section">
+                <h2 class="section-title">3. Dates et Horaires</h2>
+                
+                <div class="info-box">
+                    <p><strong>⚠️ Informations importantes :</strong></p>
+                    <p>• Les formations se déroulent <strong>dans les locaux de votre entreprise</strong></p>
+                    <p>• Aux <strong>horaires de travail de votre entreprise</strong></p>
+                    <p>• La pause déjeuner sera également <strong>aux horaires de votre entreprise</strong></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="dates">Dates disponibles <span class="required">*</span></label>
+                    <textarea id="dates" name="dates" required placeholder="Exemple : Du 15 au 19 mars 2026, ou bien Semaine du 22 mars 2026"></textarea>
+                    <small>Indiquez vos disponibilités (dates précises ou période souhaitée)</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="horaires">Horaires de votre entreprise <span class="required">*</span></label>
+                    <input type="text" id="horaires" name="horaires" required placeholder="Exemple : 8h00 - 17h00">
+                </div>
+
+                <div class="form-group">
+                    <label for="pause">Horaires de pause déjeuner <span class="required">*</span></label>
+                    <input type="text" id="pause" name="pause" required placeholder="Exemple : 12h00 - 13h00">
+                </div>
+            </div>
+
+            <!-- Section 4: Participants -->
+            <div class="form-section">
+                <h2 class="section-title">4. Participants</h2>
+                
+                <div class="form-group">
+                    <label for="nbParticipants">Nombre de participants <span class="required">*</span></label>
+                    <input type="number" id="nbParticipants" name="nbParticipants" min="1" max="8" value="1" required>
+                    <small>Maximum 8 participants par formation</small>
+                </div>
+
+                <div id="participantsContainer">
+                    <!-- Les participants seront ajoutés ici dynamiquement -->
+                </div>
+
+                <button type="button" class="btn-add" id="btnAddParticipant">
+                    <span>➕</span> Ajouter un participant
+                </button>
+            </div>
+
+            <!-- Section 5: Financement -->
+            <div class="form-section">
+                <h2 class="section-title">5. Financement</h2>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="fpg" name="fpg" value="oui">
+                    <label for="fpg">Je souhaite faire une demande de prise en charge par le FPG (Fonds Paritaire de Gestion)</label>
+                </div>
+
+                <div class="info-box" style="margin-top: 1.5rem;">
+                    <p><strong>ℹ️ Information FPG :</strong></p>
+                    <p>Le Fonds Paritaire de Gestion est une institution locale qui peut prendre en charge tout ou partie des coûts de formation, pour les entreprises à jour de leurs cotisations, après étude et validation du dossier par ses services instructeurs.</p>
+                </div>
+
+                <div class="form-group" style="margin-top: 1.5rem;">
+                    <label for="commentaires">Commentaires ou demandes spécifiques</label>
+                    <textarea id="commentaires" name="commentaires" placeholder="Informations complémentaires, besoins spécifiques, etc."></textarea>
+                </div>
+            </div>
+
+            <!-- Conclusion -->
+            <div class="conclusion-box">
+                <h3>📋 Prochaines étapes</h3>
+                <p>Suite à la réception de votre demande, je vous communiquerai :</p>
+                <ul>
+                    <li><strong>Le devis détaillé</strong> de la formation</li>
+                    <li><strong>Une convention de formation</strong> à signer</li>
+                    <li><strong>Le document unique du FPG</strong> (si demande de prise en charge) à compléter et à signer</li>
+                    <li><strong>Une fiche de présence</strong> à compléter avec les noms et prénoms des stagiaires et à me retourner. Cette fiche devra être transmise au plus tard au début de la formation.</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Délai de réponse :</strong> Vous recevrez ces documents sous 48h ouvrées.</p>
+            </div>
+
+            <!-- Bouton Submit -->
+            <div class="submit-section">
+                <button type="submit" class="btn-submit">📤 Envoyer ma demande de devis</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bouton flottant -->
+    <div class="floating-nav">
+        <button class="floating-btn" id="btnTop" onclick="scrollToTop()" title="Retour en haut">
+            ⬆️
+        </button>
+    </div>
+
+    <script>
+        // Gestion du nombre de participants
+        let participantCount = 1;
+
+        function createParticipantCard(number) {
+            return `
+                <div class="participant-card" id="participant-${number}">
+                    <div class="participant-header">
+                        <span class="participant-number">Participant ${number}</span>
+                        ${number > 1 ? `<button type="button" class="btn-remove" onclick="removeParticipant(${number})">❌ Retirer</button>` : ''}
+                    </div>
+                    <div class="participant-row">
+                        <div class="form-group">
+                            <label for="nom-${number}">Nom <span class="required">*</span></label>
+                            <input type="text" id="nom-${number}" name="nom-${number}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="prenom-${number}">Prénom <span class="required">*</span></label>
+                            <input type="text" id="prenom-${number}" name="prenom-${number}" required>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function updateParticipants() {
+            const container = document.getElementById('participantsContainer');
+            const nbInput = document.getElementById('nbParticipants');
+            const requestedCount = parseInt(nbInput.value) || 1;
+
+            // Limiter à 8 participants
+            if (requestedCount > 8) {
+                nbInput.value = 8;
+                return;
+            }
+
+            // Ajouter ou retirer des participants
+            if (requestedCount > participantCount) {
+                for (let i = participantCount + 1; i <= requestedCount; i++) {
+                    const div = document.createElement('div');
+                    div.innerHTML = createParticipantCard(i);
+                    container.appendChild(div.firstElementChild);
+                }
+            } else if (requestedCount < participantCount) {
+                for (let i = participantCount; i > requestedCount; i--) {
+                    const card = document.getElementById(`participant-${i}`);
+                    if (card) card.remove();
+                }
+            }
+
+            participantCount = requestedCount;
+        }
+
+        function removeParticipant(number) {
+            const nbInput = document.getElementById('nbParticipants');
+            nbInput.value = parseInt(nbInput.value) - 1;
+            updateParticipants();
+        }
+
+        // Event listeners
+        document.getElementById('nbParticipants').addEventListener('input', updateParticipants);
+        document.getElementById('btnAddParticipant').addEventListener('click', function() {
+            const nbInput = document.getElementById('nbParticipants');
+            if (parseInt(nbInput.value) < 8) {
+                nbInput.value = parseInt(nbInput.value) + 1;
+                updateParticipants();
+            } else {
+                alert('Maximum 8 participants par formation');
+            }
+        });
+
+        // Initialiser avec 1 participant
+        updateParticipants();
+
+        // Gestion du formulaire
+        document.getElementById('devisForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Récupérer toutes les données
+            const formData = new FormData(this);
+            let emailBody = 'DEMANDE DE DEVIS - AUTO-FORMATION POLYNÉSIENNE\n\n';
+            
+            emailBody += '=== INFORMATIONS ENTREPRISE ===\n';
+            emailBody += `Entreprise: ${formData.get('entreprise')}\n`;
+            emailBody += `Contact: ${formData.get('contact')}\n`;
+            emailBody += `Email: ${formData.get('email')}\n`;
+            emailBody += `Téléphone: ${formData.get('telephone')}\n`;
+            emailBody += `Adresse: ${formData.get('adresse')}\n\n`;
+            
+            emailBody += '=== FORMATION SOUHAITÉE ===\n';
+            emailBody += `Formation: ${formData.get('formation')}\n`;
+            emailBody += `Niveau: ${formData.get('niveau') || 'Non précisé'}\n\n`;
+            
+            emailBody += '=== DATES ET HORAIRES ===\n';
+            emailBody += `Dates disponibles: ${formData.get('dates')}\n`;
+            emailBody += `Horaires entreprise: ${formData.get('horaires')}\n`;
+            emailBody += `Pause déjeuner: ${formData.get('pause')}\n\n`;
+            
+            emailBody += '=== PARTICIPANTS ===\n';
+            emailBody += `Nombre: ${formData.get('nbParticipants')}\n`;
+            for (let i = 1; i <= participantCount; i++) {
+                emailBody += `${i}. ${formData.get('nom-' + i)} ${formData.get('prenom-' + i)}\n`;
+            }
+            emailBody += '\n';
+            
+            emailBody += '=== FINANCEMENT ===\n';
+            emailBody += `Demande FPG: ${formData.get('fpg') ? 'OUI' : 'NON'}\n\n`;
+            
+            if (formData.get('commentaires')) {
+                emailBody += '=== COMMENTAIRES ===\n';
+                emailBody += formData.get('commentaires') + '\n';
+            }
+
+            // Créer le lien mailto
+            const subject = 'Demande de devis - ' + formData.get('formation');
+            const mailtoLink = `mailto:auto.formation.polynesienne@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+            
+            // Ouvrir le client email
+            window.location.href = mailtoLink;
+            
+            // Message de confirmation
+            alert('Votre client email va s\'ouvrir avec votre demande pré-remplie. Vérifiez les informations et envoyez le message.\n\nVous recevrez une réponse avec le devis, la convention et le document FPG sous 48h ouvrées.');
+        });
+
+        // Bouton retour en haut
+        const btnTop = document.getElementById('btnTop');
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                btnTop.classList.add('visible');
+            } else {
+                btnTop.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>

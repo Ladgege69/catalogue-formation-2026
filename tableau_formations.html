@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau des Formations 2026 - Auto-Formation Polynésienne</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0066CC;
+            --secondary: #FF6B00;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --accent: #00C9A7;
+            --text: #2d3436;
+            --niveau1: #4CAF50;
+            --niveau2: #FF9800;
+            --niveau3: #f44336;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+            padding-bottom: 3rem;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--dark) 0%, #2d3561 100%);
+            color: white;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.8rem 1.5rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #00b396;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,201,167,0.3);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .legend {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .legend-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            color: white;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .legend-badge.niveau1 { background: var(--niveau1); }
+        .legend-badge.niveau2 { background: var(--niveau2); }
+        .legend-badge.niveau3 { background: var(--niveau3); }
+
+        .formation-category {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .formation-category:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 25px rgba(0,0,0,0.12);
+        }
+
+        .category-title {
+            font-family: 'Merriweather', serif;
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+        }
+
+        .formation-group {
+            margin-bottom: 2.5rem;
+        }
+
+        .formation-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .group-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            padding: 0.8rem 1.2rem;
+            background: linear-gradient(135deg, rgba(0,102,204,0.1), rgba(0,201,167,0.1));
+            border-left: 4px solid var(--primary);
+            border-radius: 6px;
+        }
+
+        .formation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .formation-table thead {
+            background: linear-gradient(135deg, var(--dark), #2d3561);
+            color: white;
+        }
+
+        .formation-table th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .formation-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .formation-table tbody tr {
+            transition: background-color 0.2s ease;
+        }
+
+        .formation-table tbody tr:hover {
+            background-color: rgba(0,102,204,0.05);
+        }
+
+        .formation-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .col-item {
+            width: 35%;
+            font-weight: 600;
+        }
+
+        .col-niveau {
+            width: 10%;
+            text-align: center;
+        }
+
+        .col-duree {
+            width: 10%;
+            text-align: center;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .col-objectifs {
+            width: 45%;
+            line-height: 1.7;
+        }
+
+        .niveau-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            color: white;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .niveau-badge.niveau-i {
+            background: var(--niveau1);
+        }
+
+        .niveau-badge.niveau-ii {
+            background: var(--niveau2);
+        }
+
+        .niveau-badge.niveau-iii {
+            background: var(--niveau3);
+        }
+
+        .special-note {
+            background: linear-gradient(135deg, rgba(255,107,0,0.1), rgba(255,193,7,0.1));
+            border-left: 4px solid var(--secondary);
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+
+        /* Boutons de navigation flottants */
+        .floating-nav {
+            position: fixed;
+            right: 2rem;
+            bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        .floating-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+        }
+
+        .floating-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 30px rgba(0,0,0,0.25);
+        }
+
+        .btn-top {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .btn-catalogue {
+            background: linear-gradient(135deg, var(--secondary), #ff8c00);
+        }
+
+        .floating-btn:active {
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 768px) {
+            .floating-nav {
+                right: 1rem;
+                bottom: 1rem;
+            }
+
+            .floating-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .category-title {
+                font-size: 1.5rem;
+            }
+
+            .legend {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .formation-table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            .formation-table td {
+                padding: 0.8rem;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .formation-category {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>📊 Tableau des Formations 2026</h1>
+            <p>Catalogue complet des modules de formation Auto-Formation Polynésienne</p>
+            <a href="catalogue_afp_2026.html" class="back-button">← Retour au catalogue</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="legend">
+            <div class="legend-item">
+                <span class="legend-badge niveau1">I</span>
+                <span>Bases / Initiation</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-badge niveau2">II</span>
+                <span>Perfectionnement</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-badge niveau3">III</span>
+                <span>Expertise / Diagnostic</span>
+            </div>
+        </div>
+
+        <!-- SECTION 1: Mécanique 1 -->
+        <section class="formation-category">
+            <h2 class="category-title">
+                <span class="category-icon">⚙️</span>
+                Formations techniques sur la maintenance
+            </h2>
+
+            <!-- Mécanique général -->
+            <div class="formation-group">
+                <h3 class="group-title">Mécanique général</h3>
+                <table class="formation-table">
+                    <thead>
+                        <tr>
+                            <th class="col-item">Item</th>
+                            <th class="col-niveau">Niveau</th>
+                            <th class="col-duree">Durée</th>
+                            <th class="col-objectifs">Objectifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Les éléments de serrage</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-i">I</span></td>
+                            <td class="col-duree">14 h</td>
+                            <td>Savoir réparer, entretenir des éléments mécaniques et maîtriser le vocabulaire technique.</td>
+                        </tr>
+                        <tr>
+                            <td>Les assemblages</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Les roulements</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Les instruments de mesure</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Le dessin technique</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Le véhicule automobile -->
+            <div class="formation-group">
+                <h3 class="group-title">Le véhicule automobile</h3>
+                <table class="formation-table">
+                    <thead>
+                        <tr>
+                            <th class="col-item">Item</th>
+                            <th class="col-niveau">Niveau</th>
+                            <th class="col-duree">Durée</th>
+                            <th class="col-objectifs">Objectifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Brève histoire de l'auto</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-i">I</span></td>
+                            <td class="col-duree">14 h</td>
+                            <td>Maîtriser les connaissances et capacités de base pour réaliser les opérations d'entretien courants sur des systèmes mécanique.</td>
+                        </tr>
+                        <tr>
+                            <td>Les documents administratifs</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Le système de motorisation</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Le système de freinage</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Le système de transmission</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Le système de tenue de route</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Le moteur thermique -->
+            <div class="formation-group">
+                <h3 class="group-title">Le moteur thermique</h3>
+                <table class="formation-table">
+                    <thead>
+                        <tr>
+                            <th class="col-item">Item</th>
+                            <th class="col-niveau">Niveau</th>
+                            <th class="col-duree">Durée</th>
+                            <th class="col-objectifs">Objectifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Analyse structurelle</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-ii">II</span></td>
+                            <td class="col-duree">14 h</td>
+                            <td>Maîtriser les connaissances et capacités de base pour réaliser les opérations d'entretien courants sur des systèmes mécanique.</td>
+                        </tr>
+                        <tr>
+                            <td>Analyse fonctionnelle</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Le circuit de graissage</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Le circuit de refroidissement</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Gestion des moteurs essence -->
+            <div class="formation-group">
+                <h3 class="group-title">Gestion des moteurs essence</h3>
+                <table class="formation-table">
+                    <thead>
+                        <tr>
+                            <th class="col-item">Item</th>
+                            <th class="col-niveau">Niveau</th>
+                            <th class="col-duree">Durée</th>
+                            <th class="col-objectifs">Objectifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Les allumages</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-iii">III</span></td>
+                            <td class="col-duree">14 h</td>
+                            <td>Maîtriser les connaissances et capacités nécessaires pour réaliser des opérations de maintenance complexe.</td>
+                        </tr>
+                        <tr>
+                            <td>La carburation</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Les injections essence</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>La gestion des moteurs</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-iii">III</span></td>
+                            <td class="col-duree">14 h</td>
+                            <td>Atteindre un niveau d'expertise suffisant pour établir un diagnostic fiable et exécuter une réparation complexe.</td>
+                        </tr>
+                        <tr>
+                            <td>Suralimentation & dépollution</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Le diagnostic des moteurs</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Gestion des moteurs Diesel -->
+            <div class="formation-group">
+                <h3 class="group-title">Gestion des moteurs Diesel</h3>
+                <table class="formation-table">
+                    <thead>
+                        <tr>
+                            <th class="col-item">Item</th>
+                            <th class="col-niveau">Niveau</th>
+                            <th class="col-duree">Durée</th>
+                            <th class="col-objectifs">Objectifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Analyse fonctionnelle</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-iii">III</span></td>
+                            <td class="col-duree">14 h</td>
+                            <td>Savoir réaliser des opérations techniques complexes en respectant les consignes de sécurité et environnementales</td>
+                        </tr>
+                        <tr>
+                            <td>Le circuit hydraulique</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Le préchauffage</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Les injections hautes pression</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-iii">III</span></td>
+                            <td class="col-duree">14 h</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Diagnostic des moteurs</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECTION 2: Mécanique 2 -->
+        <section class="formation-category">
+            <h2 class="category-title">
+                <span class="category-icon">⚙️</span>
+                Formations techniques
+            </h2>
+
+            <!-- Les transmissions -->
+            <div class="formation-group">
+                <h3 class="group-title">Les transmissions</h3>
+                <table class="formation-table">
+                    <thead>
+                        <tr>
+                            <th class="col-item">Item</th>
+                            <th class="col-niveau">Niveau</th>
+                            <th class="col-duree">Durée</th>
+                            <th class="col-objectifs">Objectifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Les embrayages</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-iii">III</span></td>
+                            <td class="col-duree">14 h</td>
+                            <td>Atteindre un niveau d'expertise suffisant pour établir un diagnostic fiable et exécuter une réparation complexe. Maîtriser le vocabulaire et les appareils de réglage des trains roulants. Savoir réaliser une purge avec la valise de diagnostic</td>
+                        </tr>
+                        <tr>
+                            <td>Les boîtes de vitesses manuelles</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Les joints homocinétiques</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- La tenue de route -->
+            <div class="formation-group">
+                <h3 class="group-title">La tenue de route</h3>
+                <table class="formation-table">
+                    <thead>
+                        <tr>
+                            <th class="col-item">Item</th>
+                            <th class="col-niveau">Niveau</th>
+                            <th class="col-duree">Durée</th>
+                            <th class="col-objectifs">Objectifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Les pneumatiques</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-iii">III</span></td>
+                            <td class="col-duree">14 h</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Les suspensions</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>La géométrie des trains roulants</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Le freinage -->
+            <div class="formation-group">
+                <h3 class="group-title">Le freinage</h3>
+                <table class="formation-table">
+                    <thead>
+                        <tr>
+                            <th class="col-item">Item</th>
+                            <th class="col-niveau">Niveau</th>
+                            <th class="col-duree">Durée</th>
+                            <th class="col-objectifs">Objectifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Aspect physique du freinage</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-iii">III</span></td>
+                            <td class="col-duree">14 h</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Le circuit de freinage</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Les ABS</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Électricité -->
+            <div class="formation-group">
+                <h3 class="group-title">Électricité</h3>
+                <table class="formation-table">
+                    <thead>
+                        <tr>
+                            <th class="col-item">Item</th>
+                            <th class="col-niveau">Niveau</th>
+                            <th class="col-duree">Durée</th>
+                            <th class="col-objectifs">Objectifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>U, I, R et puissance</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-ii">II</span></td>
+                            <td class="col-duree">14 h</td>
+                            <td>Maîtriser les connaissances et capacités de base pour réaliser les opérations de maintenance complexe</td>
+                        </tr>
+                        <tr>
+                            <td>Les relais simple et double</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Lecture de schéma</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Les installations électriques simples</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>La batterie</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-iii">III</span></td>
+                            <td class="col-duree">14 h</td>
+                            <td>Maîtriser l'utilisation des outils de mesure en toute sécurité.</td>
+                        </tr>
+                        <tr>
+                            <td>Le circuit de charge</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Le circuit de démarrage</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Les installations électriques</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Le véhicule hybride -->
+            <div class="formation-group">
+                <h3 class="group-title">Le véhicule hybride*</h3>
+                <table class="formation-table">
+                    <thead>
+                        <tr>
+                            <th class="col-item">Item</th>
+                            <th class="col-niveau">Niveau</th>
+                            <th class="col-duree">Durée</th>
+                            <th class="col-objectifs">Objectifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>L'environnement</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-iii">III</span></td>
+                            <td class="col-duree">14 h</td>
+                            <td>Cette formation permet juste l'accès à la connaissance et aux précautions d'usages vis-à-vis de ces véhicules.</td>
+                        </tr>
+                        <tr>
+                            <td>Classification</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Batterie et moteur électrique</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Bilan énergétique</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Le multiplexage -->
+            <div class="formation-group">
+                <h3 class="group-title">Le multiplexage</h3>
+                <table class="formation-table">
+                    <thead>
+                        <tr>
+                            <th class="col-item">Item</th>
+                            <th class="col-niveau">Niveau</th>
+                            <th class="col-duree">Durée</th>
+                            <th class="col-objectifs">Objectifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Les systèmes automatisés</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-iii">III</span></td>
+                            <td class="col-duree">14 h</td>
+                            <td>Maîtriser les connaissances et capacités nécessaires pour réaliser des opérations de maintenance complexe. Maîtriser l'utilisation des outils de diagnostic moderne.</td>
+                        </tr>
+                        <tr>
+                            <td>Les capteurs</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Le multiplexage</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- La climatisation -->
+            <div class="formation-group">
+                <h3 class="group-title">La climatisation**</h3>
+                <table class="formation-table">
+                    <thead>
+                        <tr>
+                            <th class="col-item">Item</th>
+                            <th class="col-niveau">Niveau</th>
+                            <th class="col-duree">Durée</th>
+                            <th class="col-objectifs">Objectifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Aspect physique</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-iii">III</span></td>
+                            <td class="col-duree">14 h</td>
+                            <td>Connaître la boucle du froid pour pouvoir effectuer les contrôles de pression et de température. Savoir effectuer une recharge clim. Réaliser un diagnostic fiable et précis.</td>
+                        </tr>
+                        <tr>
+                            <td>La boucle du froid</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Gestion du froid</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Les bases de l'hydraulique -->
+            <div class="formation-group">
+                <h3 class="group-title">Les bases de l'hydraulique</h3>
+                <table class="formation-table">
+                    <thead>
+                        <tr>
+                            <th class="col-item">Item</th>
+                            <th class="col-niveau">Niveau</th>
+                            <th class="col-duree">Durée</th>
+                            <th class="col-objectifs">Objectifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Le circuit élémentaire</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-ii">II</span></td>
+                            <td class="col-duree">14 h</td>
+                            <td>Maîtriser les connaissances et capacités de base pour réaliser les opérations d'entretien courants.</td>
+                        </tr>
+                        <tr>
+                            <td>Les pompes hydrauliques</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>La symbolisation</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Les systèmes de confort et de sécurité -->
+            <div class="formation-group">
+                <h3 class="group-title">Les systèmes de confort et de sécurité</h3>
+                <table class="formation-table">
+                    <thead>
+                        <tr>
+                            <th class="col-item">Item</th>
+                            <th class="col-niveau">Niveau</th>
+                            <th class="col-duree">Durée</th>
+                            <th class="col-objectifs">Objectifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Les suspensions intelligentes</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-iii">III</span></td>
+                            <td class="col-duree">15 h</td>
+                            <td>Maîtriser les connaissances et capacités nécessaires pour réaliser des opérations de maintenance complexe. Maîtriser l'utilisation des outils de diagnostic moderne.</td>
+                        </tr>
+                        <tr>
+                            <td>Le véhicule connecté</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Sécurité active et passive</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="special-note" style="margin-top: 2rem;">
+                <p><strong>* Note importante :</strong> La maintenance sur les véhicules hybrides ou électriques impose une habilitation spécifique délivrée par le bureau VERITAS.</p>
+                <p><strong>** Note importante :</strong> La recharge des climatisations fait appel à un outillage de diagnostic et de recharge du fluide frigorigène spécifique.</p>
+            </div>
+        </section>
+
+        <!-- SECTION 3: Gestion atelier -->
+        <section class="formation-category">
+            <h2 class="category-title">
+                <span class="category-icon">📊</span>
+                Gestion atelier
+            </h2>
+
+            <div class="formation-group">
+                <h3 class="group-title">Organisation et gestion d'un atelier</h3>
+                <table class="formation-table">
+                    <thead>
+                        <tr>
+                            <th class="col-item">Item</th>
+                            <th class="col-objectifs">Objectifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-item">Organisation rationnelle d'un atelier de maintenance</td>
+                            <td>Maîtriser les connaissances et savoirs faire afin d'optimiser significativement la rentabilité d'un atelier.</td>
+                        </tr>
+                        <tr>
+                            <td class="col-item">Installation et utilisation du logiciel de gestion des heures atelier</td>
+                            <td>Maîtriser les savoirs techniques pour garantir un travail de qualité et satisfaire la clientèle.</td>
+                        </tr>
+                        <tr>
+                            <td class="col-item">Élaboration d'un carnet de bord spécifique à l'entreprise (planning, gestion des absences, …)</td>
+                            <td>Maîtriser l'outil informatique pour suivre un tableau de bord</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="special-note">
+                    <strong>Note :</strong> La durée de la formation dépendra du niveau professionnel du stagiaire, elle sera établie avec le dirigeant de l'entreprise
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Outil informatique -->
+        <section class="formation-category">
+            <h2 class="category-title">
+                <span class="category-icon">💻</span>
+                Formations informatiques pour débutant
+            </h2>
+
+            <!-- L'outil informatique -->
+            <div class="formation-group">
+                <h3 class="group-title">L'outil informatique</h3>
+                <table class="formation-table">
+                    <thead>
+                        <tr>
+                            <th class="col-item">Item</th>
+                            <th class="col-niveau">Niveau</th>
+                            <th class="col-duree">Durée</th>
+                            <th class="col-objectifs">Objectifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Les différentes fonction d'un ordinateur</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-i">I</span></td>
+                            <td class="col-duree">14 h</td>
+                            <td>Acquérir les compétences nécessaires pour utiliser un ordinateur en autonomie.</td>
+                        </tr>
+                        <tr>
+                            <td>Connaître les éléments constitutif d'un PC</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Savoir manipuler le clavier et la souris</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Identifier les différents connecteurs utilisés et leurs destinations</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Connaître les grandes lignes des différents systèmes d'exploitation utilisés sur le marché (Android, Linux, Mac et Windows)</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>L'explorateur, les dossiers et les fichiers</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-ii">II</span></td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Les boîtes à outils utiles</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Savoir faire les mises à jour</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Savoir faire des sauvegardes sur le cloud</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Savoirs régler les paramètres du pare-feu et de l'anti-virus</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Installer un logiciel</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Initiation à l'internet -->
+            <div class="formation-group">
+                <h3 class="group-title">Initiation à l'internet</h3>
+                <table class="formation-table">
+                    <thead>
+                        <tr>
+                            <th class="col-item">Item</th>
+                            <th class="col-niveau">Niveau</th>
+                            <th class="col-duree">Durée</th>
+                            <th class="col-objectifs">Objectifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Savoir comment fonctionne internet</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-i">I</span></td>
+                            <td class="col-duree">14 h</td>
+                            <td>Réaliser des prospections avec une plate-forme de recherche sécurisée, communiquer avec les institutions et maîtriser les techniques pour mettre en place un contrôle parental cohérent</td>
+                        </tr>
+                        <tr>
+                            <td>Connaître les différents navigateurs avec leurs principales caractéristiques</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Identifier la signification des principaux acronymes utilisés</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Envoyer et recevoir des courriels</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Identifier les principaux moteurs de recherche</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Définir les mots clés</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Gérer ses sites favoris</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-ii">II</span></td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Savoir choisir le bon réseau social</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Identifier les logiciels utiles</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Réaliser un contrôle parental efficace</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Créer des mots de passe sécurisés.</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Utiliser une messagerie</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Envoyer et recevoir des courriels</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Création de contenu -->
+            <div class="formation-group">
+                <h3 class="group-title">Création de contenu</h3>
+                <table class="formation-table">
+                    <thead>
+                        <tr>
+                            <th class="col-item">Item</th>
+                            <th class="col-niveau">Niveau</th>
+                            <th class="col-duree">Durée</th>
+                            <th class="col-objectifs">Objectifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Identifier les principaux outils du bandeau</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-i">I</span></td>
+                            <td class="col-duree">14 h</td>
+                            <td>Assimiler les techniques de base pour réaliser différents documents sous format numérique et les imprimer sur papier éventuellement</td>
+                        </tr>
+                        <tr>
+                            <td>Régler la police au texte à réaliser</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Savoir-faire une mise en page</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Rédiger une lettre administrative</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Connaître les principaux outils</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Repérer colonnes, lignes et cellules,</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Connaître les fonctions de calcul simple</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Savoir utiliser les liens hypertextes</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Les mises en forme conditionnelles</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-ii">II</span></td>
+                            <td class="col-duree">-</td>
+                            <td>Assimiler les techniques de base pour réaliser différents documents sous format numérique et les imprimer sur papier éventuellement</td>
+                        </tr>
+                        <tr>
+                            <td>Réaliser un classeur compte bancaire</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Les principales fonctions de PowerPoint</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Notion sur les diaporamas</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Savoir insérer des photos</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Faire des animations simples</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Réaliser un diaporama d'un projet</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECTION 5: Logiciel bureautique -->
+        <section class="formation-category">
+            <h2 class="category-title">
+                <span class="category-icon">📝</span>
+                Formations informatiques
+            </h2>
+
+            <!-- Le traitement de texte -->
+            <div class="formation-group">
+                <h3 class="group-title">Le traitement de texte</h3>
+                <table class="formation-table">
+                    <thead>
+                        <tr>
+                            <th class="col-item">Item</th>
+                            <th class="col-niveau">Niveau</th>
+                            <th class="col-duree">Durée</th>
+                            <th class="col-objectifs">Objectifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Présentation de Microsoft office</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-i">I</span></td>
+                            <td class="col-duree">14 h</td>
+                            <td>Connaître le principe des logiciels payant et des logiciels libres</td>
+                        </tr>
+                        <tr>
+                            <td>Présentation de Libre Office</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Mise en page</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Choix des polices</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-ii">II</span></td>
+                            <td class="col-duree">-</td>
+                            <td>Maîtriser les mises en pages pour réaliser divers documents</td>
+                        </tr>
+                        <tr>
+                            <td>Réaliser un CV</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Réaliser un courrier administratif</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Les feuilles de calcul -->
+            <div class="formation-group">
+                <h3 class="group-title">Les feuilles de calcul</h3>
+                <table class="formation-table">
+                    <thead>
+                        <tr>
+                            <th class="col-item">Item</th>
+                            <th class="col-niveau">Niveau</th>
+                            <th class="col-duree">Durée</th>
+                            <th class="col-objectifs">Objectifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Principales fonctions du tableur</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-ii">II</span></td>
+                            <td class="col-duree">14 h</td>
+                            <td>Exploiter les calculs simples (additions, soustractions, multiplications et divisions)</td>
+                        </tr>
+                        <tr>
+                            <td>Cellules, lignes et colonnes</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Tableau avec calcul simple</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Les liens hypertexte</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-iii">III</span></td>
+                            <td class="col-duree">-</td>
+                            <td>Maîtriser les connaissances pour pouvoir réaliser un classeur avec les principales fonctionnalités du tableur Excel</td>
+                        </tr>
+                        <tr>
+                            <td>Tableau pour compte bancaire</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>La fonction recherche valeur</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Les diaporamas -->
+            <div class="formation-group">
+                <h3 class="group-title">Les diaporamas ou libre office (impress)</h3>
+                <table class="formation-table">
+                    <thead>
+                        <tr>
+                            <th class="col-item">Item</th>
+                            <th class="col-niveau">Niveau</th>
+                            <th class="col-duree">Durée</th>
+                            <th class="col-objectifs">Objectifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Présentation des principales fonctions</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-ii">II</span></td>
+                            <td class="col-duree">14 h</td>
+                            <td>Exploiter les fonctions de bases pour réaliser un diaporama</td>
+                        </tr>
+                        <tr>
+                            <td>Notion sur les diaporamas</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Les liens hypertexte</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-iii">III</span></td>
+                            <td class="col-duree">-</td>
+                            <td>Réaliser un diaporama avec des animations</td>
+                        </tr>
+                        <tr>
+                            <td>Réalisation d'un projet PowerPoint</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Le dessin technique -->
+            <div class="formation-group">
+                <h3 class="group-title">Le dessin technique</h3>
+                <table class="formation-table">
+                    <thead>
+                        <tr>
+                            <th class="col-item">Item</th>
+                            <th class="col-niveau">Niveau</th>
+                            <th class="col-duree">Durée</th>
+                            <th class="col-objectifs">Objectifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Présentation des principales fonctions</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-ii">II</span></td>
+                            <td class="col-duree">14 h</td>
+                            <td>Exploiter les fonctions de bases pour réaliser un dessin simple</td>
+                        </tr>
+                        <tr>
+                            <td>Choix des outils de dessin</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Utilisation des gabarits</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-iii">III</span></td>
+                            <td class="col-duree">-</td>
+                            <td>Réalisation d'un dessin complexe</td>
+                        </tr>
+                        <tr>
+                            <td>Réalisation d'un dessin simple</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>L'enregistrement des dessins</td>
+                            <td class="col-niveau">-</td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECTION 6: Global IAA -->
+        <section class="formation-category">
+            <h2 class="category-title">
+                <span class="category-icon">🤖</span>
+                Formations sur les IA
+            </h2>
+
+            <div class="special-note" style="margin-bottom: 2rem; background: linear-gradient(135deg, rgba(0,102,204,0.1), rgba(0,201,167,0.1)); border-left: 4px solid var(--accent);">
+                <p><strong>ℹ️ Formations en partenariat :</strong> Les formations sur l'Intelligence Artificielle sont réalisées en partenariat ou sous l'égide de <strong>Global IAA</strong>.</p>
+            </div>
+
+            <!-- Créer un site internet en 1 heure -->
+            <div class="formation-group">
+                <h3 class="group-title">Créer un site internet en 1 heure</h3>
+                <table class="formation-table">
+                    <thead>
+                        <tr>
+                            <th class="col-item">Item</th>
+                            <th class="col-niveau">Niveau</th>
+                            <th class="col-duree">Durée</th>
+                            <th class="col-objectifs">Objectifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Présentation de l'interface</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-ii">II</span></td>
+                            <td class="col-duree">8h00</td>
+                            <td>Créer, organiser, personnaliser, optimiser, publier un site internet professionnel immédiatement</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Utiliser ChatGPT en entreprise -->
+            <div class="formation-group">
+                <h3 class="group-title">Utiliser ChatGPT en entreprise</h3>
+                <table class="formation-table">
+                    <thead>
+                        <tr>
+                            <th class="col-item">Item</th>
+                            <th class="col-niveau">Niveau</th>
+                            <th class="col-duree">Durée</th>
+                            <th class="col-objectifs">Objectifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Introduction à ChatGPT</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-i">I</span></td>
+                            <td class="col-duree">21h00</td>
+                            <td>Apprendre à utiliser ChatGPT pour améliorer la communication, la productivité et l'automatisation en entreprise.</td>
+                        </tr>
+                        <tr>
+                            <td>Utilisation des prompts</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-ii">II</span></td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Personnalisation des réponses</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-iii">III</span></td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Utiliser N8N en entreprise -->
+            <div class="formation-group">
+                <h3 class="group-title">Utiliser N8N en entreprise</h3>
+                <table class="formation-table">
+                    <thead>
+                        <tr>
+                            <th class="col-item">Item</th>
+                            <th class="col-niveau">Niveau</th>
+                            <th class="col-duree">Durée</th>
+                            <th class="col-objectifs">Objectifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Présentation de l'interface</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-i">I</span></td>
+                            <td class="col-duree">21h00</td>
+                            <td>Comprendre le fonctionnement de n8n.AI et apprendre à concevoir, optimiser et gérer des automatisations adaptées aux besoins personnels et professionnels</td>
+                        </tr>
+                        <tr>
+                            <td>Création de workflow simple</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-ii">II</span></td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Utilisation des API externes</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-iii">III</span></td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Utiliser Notion en entreprise -->
+            <div class="formation-group">
+                <h3 class="group-title">Utiliser Notion en entreprise</h3>
+                <table class="formation-table">
+                    <thead>
+                        <tr>
+                            <th class="col-item">Item</th>
+                            <th class="col-niveau">Niveau</th>
+                            <th class="col-duree">Durée</th>
+                            <th class="col-objectifs">Objectifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Présentation de l'interface</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-i">I</span></td>
+                            <td class="col-duree">28h00</td>
+                            <td>Comprendre le fonctionnement de NOTION, ses capacités, et apprendre à l'utiliser dans des contextes professionnels et personnels.</td>
+                        </tr>
+                        <tr>
+                            <td>Optimisation de la gestion de projet</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-ii">II</span></td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Les bases de données</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-iii">III</span></td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>L'IA de Notion</td>
+                            <td class="col-niveau"><span class="niveau-badge niveau-iii">III</span></td>
+                            <td class="col-duree">-</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <!-- Boutons de navigation flottants -->
+    <div class="floating-nav">
+        <button class="floating-btn btn-top" id="btnTop" onclick="scrollToTop()" title="Retour en haut">
+            ⬆️
+        </button>
+        <a href="catalogue_afp_2026.html" class="floating-btn btn-catalogue" title="Retour au catalogue">
+            📋
+        </a>
+    </div>
+
+    <script>
+        // Smooth scroll pour l'ancre
+        document.addEventListener('DOMContentLoaded', function() {
+            const hash = window.location.hash;
+            if (hash) {
+                const element = document.querySelector(hash);
+                if (element) {
+                    setTimeout(() => {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                }
+            }
+        });
+
+        // Gestion du bouton "Retour en haut"
+        const btnTop = document.getElementById('btnTop');
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                btnTop.classList.add('visible');
+            } else {
+                btnTop.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>
